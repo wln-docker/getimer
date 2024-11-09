@@ -14,12 +14,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Pull from QCloud
-      run: docker pull ccr.ccs.tencentyun.com/wlniao/getimer && docker tag ccr.ccs.tencentyun.com/wlniao/getimer ideploy/getimer
+    - name: Build or pull image
+      run: docker build . --file Dockerfile --tag ideploy/getimer:latest  
+      #run: docker pull ccr.ccs.tencentyun.com/wlniao/getimer && docker tag ccr.ccs.tencentyun.com/wlniao/getimer ideploy/getimer
     - name: Login docker hub
       run: echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login --username ${{secrets.DOCKERHUB_USER}} --password-stdin
-
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ideploy/getimer:latest  
     - name: Push to DockerHub
       run: docker push ideploy/getimer

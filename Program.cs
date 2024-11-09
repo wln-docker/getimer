@@ -10,7 +10,7 @@ var cfg = XCore.Init(args);
 if (cfg != null)
 {
     var urls = Wlniao.Config.GetSetting("URLS").SplitBy();
-    if (int.TryParse(Wlniao.Config.GetSetting("WaitTime", "5000"), out int wait) || wait < 0)
+    if (int.TryParse(Wlniao.Config.GetSetting("WaitSeconds", "5"), out int wait) || wait < 0)
     {
         if (wait > 0)
         {
@@ -20,7 +20,7 @@ if (cfg != null)
                 if (ctx.Path.IndexOf('.') < 0)
                 {
                     var finish = 0;
-                    var endTime = DateTime.Now.AddMilliseconds(wait);
+                    var endTime = DateTime.Now.AddSeconds(wait);
                     foreach (var url in urls)
                     {
                         new System.Threading.Thread(() =>

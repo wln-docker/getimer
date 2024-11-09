@@ -14,5 +14,18 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
+    - name: Login docker hub
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      # 指定login命令登录hub.docker.com，帐号和密码已经在GitHub网页中配置好了
+      run: |
+        echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag ideploy/getimer:latest
+      run: docker build . --file Dockerfile --tag ideploy/getimer:latest  
+    - name: Pull from QCloud
+      run: docker pull ccr.ccs.tencentyun.com/wlniao/getimer && docker tag  ccr.ccs.tencentyun.com/wlniao/getimer ideploy/getimer
+
+      
+    - name: Push to DockerHub
+      run: docker push ideploy/getimer

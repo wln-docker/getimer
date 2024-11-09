@@ -26,11 +26,5 @@
 	  <None Update="Dockerfile">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	  </None>
-	  <None Update="xcore.config">
-	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-	  </None>
-	  <None Update="health_checkup\*;health_checkup\*\**">
-	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </None>
 	</ItemGroup>
 </Project>

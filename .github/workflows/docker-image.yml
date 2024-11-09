@@ -15,13 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Pull from QCloud
-      run: docker pull ccr.ccs.tencentyun.com/wlniao/getimer && docker tag  ccr.ccs.tencentyun.com/wlniao/getimer ideploy/getimer
+      run: docker pull ccr.ccs.tencentyun.com/wlniao/getimer && docker tag ccr.ccs.tencentyun.com/wlniao/getimer ideploy/getimer
     - name: Login docker hub
-      env:
-        DOCKERHUB_USER: ${{secrets.DOCKERHUB_USER}}
-        DOCKERHUB_TOKEN: ${{secrets.DOCKERHUB_TOKEN}}
-      # 指定login命令登录hub.docker.com，帐号和密码已经在GitHub网页中配置好了
-      run: docker login --username ${DOCKERHUB_USER} --password ${DOCKERHUB_TOKEN}
+      run: echo "${{secrets.DOCKERHUB_TOKEN}}" | docker login --username ${{secrets.DOCKERHUB_USER}} --password-stdin
 
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ideploy/getimer:latest  

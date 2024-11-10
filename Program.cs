@@ -1,13 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
 using Wlniao;
-var urls = Wlniao.Config.GetSetting("URLS").Trim().SplitBy();
-if (int.TryParse(Wlniao.Config.GetSetting("WaitSeconds"), out int wait) && wait >= 0)
+var urls = Wlniao.Config.GetSetting("URLS", "").Trim().SplitBy();
+if (int.TryParse(Wlniao.Config.GetSetting("WaitSeconds", "0"), out int wait) && wait >= 0)
 {
     if (wait > 0)
     {
@@ -22,9 +16,8 @@ if (int.TryParse(Wlniao.Config.GetSetting("WaitSeconds"), out int wait) && wait 
                 {
                     new System.Threading.Thread(() =>
                     {
-                        var time = DateTools.Format();
                         var result = Wlniao.NetTools.Request(url, "");
-                        Console.WriteLine($"{time} {url} => {result}");
+                        Wlniao.Log.Loger.Topic("history", $"{url} => {result}");
                         finish++;
                     }).Start();
                 }
@@ -41,9 +34,8 @@ if (int.TryParse(Wlniao.Config.GetSetting("WaitSeconds"), out int wait) && wait 
     {
         foreach (var url in urls)
         {
-            var time = DateTools.Format();
             var result = Wlniao.NetTools.Request(url, "");
-            Console.WriteLine($"{time} {url} => {result}");
+            Wlniao.Log.Loger.Topic("history", $"{url} => {result}");
         }
     }
 }

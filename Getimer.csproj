@@ -20,7 +20,7 @@
 	  <None Remove="Properties\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <PackageReference Include="Wlniao.Mini" Version="1.1.0" />
+	  <PackageReference Include="Wlniao.Mini" Version="1.1.2" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Update="Dockerfile">

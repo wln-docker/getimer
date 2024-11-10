@@ -9,6 +9,7 @@ RUN dotnet publish -o /dist --self-contained -c Release -p:PublishAot=true -p:Pu
 FROM ccr.ccs.tencentyun.com/wlniao/aot:8.0-alpine as builder
 COPY --chmod=0777 --from=publish /dist/getimer /wln
 WORKDIR /wln
-ENV WaitSeconds=0
+ENV LogFile="/wln/level.log"
+ENV WaitSeconds=10
 ENV URLS=""
 CMD getimer

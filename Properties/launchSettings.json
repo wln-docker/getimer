@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Getimer": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "URLS": "https://service.wlniao.com/api/timer,https://service.wlniao.com/api/watch",
+        "LogFile": "level.log",
+        "LogType": "file"
+      }
+    }
+  }
+}
